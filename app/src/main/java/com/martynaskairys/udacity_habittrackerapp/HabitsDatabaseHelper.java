@@ -50,7 +50,7 @@ public class HabitsDatabaseHelper extends SQLiteOpenHelper {
         try {
             db.delete(
                     Habits.Entry.TABLE_NAME,
-                    Habits.Entry.ID + "=" + recordId,
+                    "=" + recordId,
                     null);
         } catch (Exception e) {
             e.printStackTrace();
@@ -73,14 +73,14 @@ public class HabitsDatabaseHelper extends SQLiteOpenHelper {
         db.close();
     }
 
-    public void updateRecord(int recordId, ContentValues contentValues) {
-        
+    public void updateRecord(ContentValues contentValues) {
+
         db = getWritableDatabase();
         try {
             db.update(
                     Habits.Entry.TABLE_NAME,
                     contentValues,
-                    Habits.Entry.ID,
+                    null,
                     null
             );
         } catch (Exception e) {
@@ -93,12 +93,11 @@ public class HabitsDatabaseHelper extends SQLiteOpenHelper {
 
         Cursor record;
         String table = Habits.Entry.TABLE_NAME;
-        String selection = Habits.Entry.ID;
         String[] selectionArg = new String[]{Integer.toString(recordId)};
 
         db = getReadableDatabase();
         try {
-            record = db.query(true, table, null, selection, selectionArg,
+            record = db.query(true, table, null, null, selectionArg,
                     null, null, null, null);
             record.moveToFirst();
             record.close();
@@ -109,6 +108,22 @@ public class HabitsDatabaseHelper extends SQLiteOpenHelper {
             db.close();
             return null;
         }
+
+    }
+
+    public Cursor readRecord() {
+
+        db = getReadableDatabase();
+        String[] reading = {
+                Habits.Entry.NAME,
+                Habits.Entry.DATE_ADDED,
+                Habits.Entry.LAST_DAY_DONE,
+        };
+
+        Cursor cursor = db.query(Habits.Entry.TABLE_NAME, reading, null,
+                null, null, null, null);
+
+        return cursor;
     }
 
     public void deleteDatabase(Context context) {

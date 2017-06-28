@@ -14,24 +14,27 @@ public class MainActivity extends AppCompatActivity {
 
         HabitsDatabaseHelper habitsDatabaseHelper = new HabitsDatabaseHelper(this);
 
+        //add records
         ContentValues contentValues = new ContentValues();
         contentValues.put(Habits.Entry.NAME," drink water ");
         contentValues.put(Habits.Entry.DATE_ADDED," 7.7.2017 ");
         contentValues.put(Habits.Entry.COUNT, 0);
         habitsDatabaseHelper.addRecord(contentValues);
 
+        //update records
         contentValues.put(Habits.Entry.LAST_DAY_DONE, "8.7.2017");
         contentValues.put(Habits.Entry.COUNT, 1);
-        habitsDatabaseHelper.updateRecord(1, contentValues);
+        habitsDatabaseHelper.updateRecord(contentValues);
 
         //get records
-        Cursor habitRecord = habitsDatabaseHelper.getRecord(1);
+        habitsDatabaseHelper.getRecord(1);
 
         //delete records
         habitsDatabaseHelper.deleteRecord(1);
 
         //delete database
         habitsDatabaseHelper.deleteDatabase(this);
+
 
     }
 }
