@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
         //delete database
         habitsDatabaseHelper.deleteDatabase(this);
 
+        //read records
+        habitsDatabaseHelper.readRecord();
 
     }
 }
