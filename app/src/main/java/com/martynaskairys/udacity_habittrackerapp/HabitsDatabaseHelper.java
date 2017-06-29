@@ -25,7 +25,7 @@ public class HabitsDatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
 
         final String SQL_CREATE_TABLE =
-                "CREATE TABLE IF NOT EXISTS" +
+                "CREATE TABLE IF NOT EXISTS " +
                         Habits.Entry.TABLE_NAME +
                         "(" +
                         Habits.Entry.NAME + "," +
